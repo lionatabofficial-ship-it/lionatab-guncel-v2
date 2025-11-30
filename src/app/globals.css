@@ -3,6 +3,17 @@
 :root {
 	--background: #fafafa;
 	--foreground: #171717;
+	--card-bg: #ffffff;
+	--border-color: #e5e7eb;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: #0a0a0a;
+		--foreground: #ededed;
+		--card-bg: #1a1a1a;
+		--border-color: #333333;
+	}
 }
 
 @theme inline {
@@ -16,6 +27,50 @@ body {
 	background: var(--background);
 	color: var(--foreground);
 	font-family: 'Inter', var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Dark Mode Text Colors */
+@media (prefers-color-scheme: dark) {
+	.text-gray-900 {
+		color: #f3f4f6 !important;
+	}
+
+	.text-gray-700 {
+		color: #d1d5db !important;
+	}
+
+	.text-gray-600 {
+		color: #9ca3af !important;
+	}
+
+	.text-gray-500 {
+		color: #6b7280 !important;
+	}
+
+	.bg-white {
+		background-color: var(--card-bg) !important;
+	}
+
+	.bg-gray-50 {
+		background-color: #111111 !important;
+	}
+
+	.bg-gray-100 {
+		background-color: #1f1f1f !important;
+	}
+
+	.border-gray-200 {
+		border-color: var(--border-color) !important;
+	}
+
+	.border-gray-300 {
+		border-color: #444444 !important;
+	}
+
+	/* Keep gradient backgrounds visible in dark mode */
+	.gradient-bg {
+		background: linear-gradient(135deg, #ec4899 0%, #c2185b 100%) !important;
+	}
 }
 
 /* Custom Gradients */

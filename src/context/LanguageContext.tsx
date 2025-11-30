@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useCallback } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { translations, type Language, type TranslationKey } from '@/lib/translations';
 
 interface LanguageContextType {
@@ -11,29 +12,32 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('tr');
+export function LanguageProvider({
+  children,
+  initialLang = 'tr'
+}: {
+  children: React.ReactNode;
+  initialLang?: Language;
+}) {
+  const [language, setLanguageState] = useState<Language>(initialLang);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('language', lang);
-    }
-  }, []);
+
+    // Extract current path without language prefix
+    const segments = pathname.split('/').filter(Boolean);
+    const pathWithoutLang = segments.slice(1).join('/');
+
+    // Navigate to new language
+    const newPath = `/${lang}${pathWithoutLang ? `/${pathWithoutLang}` : ''}`;
+    router.push(newPath);
+  }, [router, pathname]);
 
   const t = useCallback((key: TranslationKey): string => {
     return translations[language][key] || translations.tr[key] || key;
   }, [language]);
-
-  // Initialize language from localStorage
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const savedLang = localStorage.getItem('language') as Language;
-      if (savedLang && translations[savedLang]) {
-        setLanguageState(savedLang);
-      }
-    }
-  }, []);
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>

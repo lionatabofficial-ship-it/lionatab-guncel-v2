@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { languages } from '@/lib/translations';
 import type { Language } from '@/lib/translations';
@@ -27,17 +28,19 @@ export default function Header() {
   return (
     <>
       {/* Navigation */}
-      <nav className="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-lg">
+      <nav className="fixed w-full z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <h1 className="text-2xl font-bold gradient-text cursor-pointer">
-              LionaTab
-            </h1>
+            <Link href={`/${language}`}>
+              <h1 className="text-2xl font-bold gradient-text cursor-pointer">
+                LionaTab
+              </h1>
+            </Link>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
-              className="md:hidden p-2 text-gray-700 hover:text-pink-600"
+              className="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:text-pink-600"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -48,7 +51,7 @@ export default function Header() {
             <div className="hidden md:flex items-center space-x-8">
               <button
                 onClick={() => scrollToSection('features')}
-                className="text-gray-700 hover:text-pink-600 font-medium"
+                className="text-gray-700 dark:text-gray-300 hover:text-pink-600 font-medium"
               >
                 {t('nav_features')}
               </button>
@@ -96,9 +99,12 @@ export default function Header() {
                 )}
               </div>
 
-              <button className="bg-pink-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-pink-700 transition">
+              <Link
+                href={`/${language}/login`}
+                className="bg-pink-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-pink-700 transition"
+              >
                 {t('nav_login')}
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -164,9 +170,13 @@ export default function Header() {
 
                 <hr className="my-4" />
 
-                <button className="w-full bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700 transition">
+                <Link
+                  href={`/${language}/login`}
+                  className="block w-full bg-pink-600 text-white px-6 py-3 rounded-lg text-center font-semibold hover:bg-pink-700 transition"
+                  onClick={() => setShowMobileMenu(false)}
+                >
                   {t('nav_login')}
-                </button>
+                </Link>
               </nav>
             </div>
           </div>
