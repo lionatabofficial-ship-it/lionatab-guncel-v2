@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-	--background: #ffffff;
+	--background: #fafafa;
 	--foreground: #171717;
 }
 
@@ -12,15 +12,179 @@
 	--font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background: #0a0a0a;
-		--foreground: #ededed;
-	}
-}
-
 body {
 	background: var(--background);
 	color: var(--foreground);
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Inter', var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Custom Gradients */
+.gradient-bg {
+	background: linear-gradient(135deg, #ec4899 0%, #c2185b 100%);
+}
+
+.gradient-text {
+	background: linear-gradient(135deg, #ec4899 0%, #c2185b 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* Feature Card Hover Effects */
+.feature-card {
+	transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 25px 50px rgba(236, 72, 153, 0.15);
+}
+
+/* Testimonial Card Effects */
+.testimonial-card {
+	transition: all 0.4s ease;
+}
+
+.testimonial-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Animations */
+@keyframes slideUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes pulse {
+	0%, 100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+}
+
+@keyframes smoothBounce {
+	0%, 100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-3px);
+	}
+}
+
+@keyframes whatsappPulse {
+	0%, 100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.05);
+	}
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.hero-title {
+		font-size: 2.5rem !important;
+	}
+
+	.feature-card {
+		padding: 1.5rem;
+	}
+
+	.mobile-text-center {
+		text-align: center;
+	}
+}
+
+@media (max-width: 640px) {
+	.hero-title {
+		font-size: 2rem !important;
+		line-height: 1.2;
+	}
+
+	.hero-subtitle {
+		font-size: 1rem !important;
+	}
+
+	section {
+		padding-top: 3rem;
+		padding-bottom: 3rem;
+	}
+}
+
+/* Register Page Responsive */
+@media (max-width: 1024px) {
+	.register-grid {
+		grid-template-columns: 1fr !important;
+	}
+}
+
+@media (max-width: 768px) {
+	.register-container {
+		padding: 2rem !important;
+	}
+
+	.register-input {
+		font-size: 16px !important;
+	}
+}
+
+@media (max-width: 640px) {
+	.register-page {
+		padding: 1rem !important;
+	}
+}
+
+/* Smooth Scrolling */
+html {
+	scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #ec4899;
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #c2185b;
+}
+
+/* Input Focus States */
+input:focus, textarea:focus, select:focus {
+	outline: none;
+	ring-width: 2px;
+	ring-color: #ec4899;
+}
+
+/* Star Rating */
+.star-rating {
+	color: #fbbf24;
+	font-size: 1.25rem;
+}
+
+/* Page Transitions */
+.page-content {
+	display: none;
+}
+
+.page-content.active {
+	display: block;
+	animation: slideUp 0.3s ease-out;
 }
